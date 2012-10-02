@@ -1,5 +1,6 @@
 require 'rspec'
 require 'rspec/fire'
+require 'awesome_print'
 
 Dir[File.expand_path "../../lib/**/*.rb", __FILE__].each &method(:require)
 

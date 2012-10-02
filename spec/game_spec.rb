@@ -1,19 +1,20 @@
 require 'spec_helper'
 
-class Cell < Struct.new(:state)
-end
-
 describe Game do
   let(:live_cell) { Cell.new('live') }
-  let(:dead_cell) { Cell.new('dead') }
-  let(:seed) { [live_cell, dead_cell] }
+  let(:live_cell2) { Cell.new('dead') }
+  let(:seed) { [live_cell, live_cell2] }
   let(:renderer) { fire_double "Renderer" }
-  let(:generation_populator) { fire_double "GenerationPopulator" }
+  let(:population_generator) { fire_double "PopulationGenerator" }
   let(:game) { Game.new seed }
+  let(:first_population) { Population.new }
+  let(:second_population) { Population.new }
+  let(:third_population) { Population.new }
 
   before do
     game.renderer = renderer
-    game.generation_populator = generation_populator
+    game.population_generator = population_generator
+    population_generator.stub(:populate_from_seed).with(seed).and_return(first_population)
   end
 
   it "starts with initial cell configuration (seed)" do
@@ -22,21 +23,18 @@ describe Game do
 
   describe "turn" do
     it "wires up generation calculator and renderer" do
-      new_cells = ['new_cell1', 'new_cell2']
-      generation_populator.stub(:populate).with([live_cell, dead_cell]).and_return(new_cells)
-      renderer.should_receive(:render).with(new_cells)
+      population_generator.stub(:populate).with(first_population).and_return(second_population)
+      renderer.should_receive(:render).with(second_population)
 
       game.next_turn!
     end
 
     it "keeps current generation state" do
-      new_cells1 = ['new_cell1', 'new_cell2']
-      new_cells2 = ['new_cell3', 'new_cell4']
-      generation_populator.stub(:populate).with([live_cell, dead_cell]).and_return(new_cells1)
-      generation_populator.stub(:populate).with(new_cells1).and_return(new_cells2)
+      population_generator.stub(:populate).with(first_population).and_return(second_population)
+      population_generator.stub(:populate).with(second_population).and_return(third_population)
 
-      renderer.should_receive(:render).with(new_cells1)
-      renderer.should_receive(:render).with(new_cells2)
+      renderer.should_receive(:render).with(second_population)
+      renderer.should_receive(:render).with(third_population)
 
       game.next_turn!
       game.next_turn!
