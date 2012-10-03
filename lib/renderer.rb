@@ -1,7 +1,11 @@
 class Renderer
+  def initialize screen_driver
+    @screen_driver = screen_driver
+  end
+
   def render generation
-    generation.each do |(x,y,cell)|
-      screen_driver.draw(x, y, '+') if cell.alive?
+    generation.each_with_index do |cell, row, col|
+      @screen_driver.draw_char(row, col, '+') if cell.alive?
     end
   end
 end

@@ -22,11 +22,17 @@ class Game
   end
 
   def renderer
-    @renderer ||= new Renderer
+    @renderer ||= Renderer.new screen_driver
   end
 
   def population_generator
-    @population_generator ||= new PopulationGenerator
+    @population_generator ||= PopulationGenerator.new(
+      max_x: screen_driver.max_x,
+      max_y: screen_driver.max_y
+    )
   end
 
+  def screen_driver
+    @screen_driver ||= ScreenDriver.new
+  end
 end
