@@ -18,7 +18,7 @@ class Game
   attr_writer :current_generation
 
   def current_generation
-    @current_generation ||= population_generator.populate_from_seed(@seed)
+    @current_generation ||= population_generator.generate_from_seed(@seed)
   end
 
   def renderer

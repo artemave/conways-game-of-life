@@ -14,7 +14,7 @@ describe Game do
   before do
     game.renderer = renderer
     game.population_generator = population_generator
-    population_generator.stub(:populate_from_seed).with(seed).and_return(first_population)
+    population_generator.stub(:generate_from_seed).with(seed).and_return(first_population)
   end
 
   it "starts with initial cell configuration (seed)" do

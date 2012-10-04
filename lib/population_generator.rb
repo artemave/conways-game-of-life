@@ -4,11 +4,11 @@ class PopulationGenerator
     @max_y = opts[:max_y]
   end
 
-  def populate_from_seed seed
+  def generate_from_seed seed
     Population.new @max_y, @max_x, seed
   end
 
-  def populate old_generation
+  def generate old_generation
     
   end
 end
