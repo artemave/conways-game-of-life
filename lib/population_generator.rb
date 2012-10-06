@@ -9,6 +9,10 @@ class PopulationGenerator
   end
 
   def generate old_generation
-    
+    neighbourhood = CellNeighbourhood.extract_from_population old_generation
+
+    new_generation = neighbourhood.map do |cell_with_neighbours_matrix|
+      CellGenerator.generate cell_with_neighbours_matrix
+    end
   end
 end

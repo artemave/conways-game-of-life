@@ -23,15 +23,15 @@ describe Game do
 
   describe "turn" do
     it "wires up generation calculator and renderer" do
-      population_generator.stub(:populate).with(first_population).and_return(second_population)
+      population_generator.stub(:generate).with(first_population).and_return(second_population)
       renderer.should_receive(:render).with(second_population)
 
       game.next_turn!
     end
 
     it "keeps current generation state" do
-      population_generator.stub(:populate).with(first_population).and_return(second_population)
-      population_generator.stub(:populate).with(second_population).and_return(third_population)
+      population_generator.stub(:generate).with(first_population).and_return(second_population)
+      population_generator.stub(:generate).with(second_population).and_return(third_population)
 
       renderer.should_receive(:render).with(second_population)
       renderer.should_receive(:render).with(third_population)

@@ -6,8 +6,8 @@ describe PopulationGenerator do
   let(:old_generation) { Object.new }
   let(:neighbourhood1) { Object.new }
   let(:neighbourhood2) { Object.new }
-  let(:cell_neighbors) { stub }
-  let(:cell_generator) { stub }
+  let(:cell_neighbourhood) { fire_replaced_class_double 'CellNeighbourhood' }
+  let(:cell_generator) { fire_replaced_class_double 'CellGenerator' }
 
   it "creates population from seed" do
     Population.stub(:new).with(5, 6, seed).and_return(population = Object.new)
@@ -16,11 +16,11 @@ describe PopulationGenerator do
   end
 
   describe "next generation" do
-    it "passes each cell with its neighbours to cell generator" do
-      cell_neighbors.stub(:extract_from_population).with(old_generation).
+    it "passes each cell with its neighbours to cell generator and returns new population out of results" do
+      cell_neighbourhood.stub(:extract_from_population).with(old_generation).
         and_return(Matrix[[neighbourhood1, Object.new],[Object.new, neighbourhood2]])
 
-      cell_generator.stub(:populate) do |neighbourhood|
+      cell_generator.stub(:generate) do |neighbourhood|
         if [neighbourhood1, neighbourhood2].include? neighbourhood
           Cell.new 'live'
         else
@@ -30,7 +30,7 @@ describe PopulationGenerator do
 
       new_generation = population_generator.generate(old_generation)
 
-      new_generation.should equal_population Population.new(5, 6, [0,0,Cell.new('live'), [0,1,Cell.new('live')]])
+      new_generation.should equal_population Population.new(2, 2, [[0,0,Cell.new('live')], [1,1,Cell.new('live')]])
     end
   end
 end

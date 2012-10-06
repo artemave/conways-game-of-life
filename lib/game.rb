@@ -8,7 +8,7 @@ class Game
   end
 
   def next_turn!
-    next_generation = population_generator.populate current_generation
+    next_generation = population_generator.generate current_generation
     renderer.render next_generation
     self.current_generation = next_generation
   end
