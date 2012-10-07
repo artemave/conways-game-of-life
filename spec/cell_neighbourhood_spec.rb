@@ -1,6 +1,9 @@
 require_relative 'spec_helper'
 
 describe CellNeighbourhood do
+  let(:live) { Cell.new 'live' }
+  let(:dead) { Cell.new 'dead' }
+
   it "produces matrix of cells with neighbours out of population" do
 
     #   0 1 2 3
@@ -8,71 +11,71 @@ describe CellNeighbourhood do
     # 1 - + - +
     # 2 - + - -
     population = Population.new 3,4, [
-      [0,0,Cell.new('live')],
-      [1,1,Cell.new('live')],
-      [1,3,Cell.new('live')],
-      [2,1,Cell.new('live')]
+      [0,0,live],
+      [1,1,live],
+      [1,3,live],
+      [2,1,live]
     ]
 
     n00 = Matrix[
-      [Cell.new('dead'),Cell.new('dead'),Cell.new('dead')],
-      [Cell.new('dead'),Cell.new('live'),Cell.new('dead')],
-      [Cell.new('dead'),Cell.new('dead'),Cell.new('live')]
+      [dead,dead,dead],
+      [dead,live,dead],
+      [dead,dead,live]
     ]
     n01 = Matrix[
-      [Cell.new('dead'),Cell.new('dead'),Cell.new('dead')],
-      [Cell.new('live'),Cell.new('dead'),Cell.new('dead')],
-      [Cell.new('dead'),Cell.new('live'),Cell.new('dead')]
+      [dead,dead,dead],
+      [live,dead,dead],
+      [dead,live,dead]
     ]
     n02 = Matrix[
-      [Cell.new('dead'),Cell.new('dead'),Cell.new('dead')],
-      [Cell.new('dead'),Cell.new('dead'),Cell.new('dead')],
-      [Cell.new('live'),Cell.new('dead'),Cell.new('live')]
+      [dead,dead,dead],
+      [dead,dead,dead],
+      [live,dead,live]
     ]
     n03 = Matrix[
-      [Cell.new('dead'),Cell.new('dead'),Cell.new('dead')],
-      [Cell.new('dead'),Cell.new('dead'),Cell.new('dead')],
-      [Cell.new('dead'),Cell.new('live'),Cell.new('dead')],
+      [dead,dead,dead],
+      [dead,dead,dead],
+      [dead,live,dead],
     ]
     n10 = Matrix[
-      [Cell.new('dead'),Cell.new('live'),Cell.new('dead')],
-      [Cell.new('dead'),Cell.new('dead'),Cell.new('live')],
-      [Cell.new('dead'),Cell.new('dead'),Cell.new('live')]
+      [dead,live,dead],
+      [dead,dead,live],
+      [dead,dead,live]
     ]
     n11 = Matrix[
-      [Cell.new('live'),Cell.new('dead'),Cell.new('dead')],
-      [Cell.new('dead'),Cell.new('live'),Cell.new('dead')],
-      [Cell.new('dead'),Cell.new('live'),Cell.new('dead')]
+      [live,dead,dead],
+      [dead,live,dead],
+      [dead,live,dead]
     ]
     n12 = Matrix[
-      [Cell.new('dead'),Cell.new('dead'),Cell.new('dead')],
-      [Cell.new('live'),Cell.new('dead'),Cell.new('live')],
-      [Cell.new('live'),Cell.new('dead'),Cell.new('dead')]
+      [dead,dead,dead],
+      [live,dead,live],
+      [live,dead,dead]
     ]
     n13 = Matrix[
-      [Cell.new('dead'),Cell.new('dead'),Cell.new('dead')],
-      [Cell.new('dead'),Cell.new('live'),Cell.new('dead')],
-      [Cell.new('dead'),Cell.new('dead'),Cell.new('dead')]
+      [dead,dead,dead],
+      [dead,live,dead],
+      [dead,dead,dead]
     ]
     n20 = Matrix[
-      [Cell.new('dead'),Cell.new('dead'),Cell.new('live')],
-      [Cell.new('dead'),Cell.new('dead'),Cell.new('live')],
-      [Cell.new('dead'),Cell.new('dead'),Cell.new('dead')]
+      [dead,dead,live],
+      [dead,dead,live],
+      [dead,dead,dead]
     ]
     n21 = Matrix[
-      [Cell.new('dead'),Cell.new('live'),Cell.new('dead')],
-      [Cell.new('dead'),Cell.new('live'),Cell.new('dead')],
-      [Cell.new('dead'),Cell.new('dead'),Cell.new('dead')]
+      [dead,live,dead],
+      [dead,live,dead],
+      [dead,dead,dead]
     ]
     n22 = Matrix[
-      [Cell.new('live'),Cell.new('dead'),Cell.new('live')],
-      [Cell.new('live'),Cell.new('dead'),Cell.new('dead')],
-      [Cell.new('dead'),Cell.new('dead'),Cell.new('dead')]
+      [live,dead,live],
+      [live,dead,dead],
+      [dead,dead,dead]
     ]
     n23 = Matrix[
-      [Cell.new('dead'),Cell.new('live'),Cell.new('dead')],
-      [Cell.new('dead'),Cell.new('dead'),Cell.new('dead')],
-      [Cell.new('dead'),Cell.new('dead'),Cell.new('dead')]
+      [dead,live,dead],
+      [dead,dead,dead],
+      [dead,dead,dead]
     ]
 
     neighbourhood = CellNeighbourhood.extract_from_population population

@@ -1,5 +1,6 @@
 require 'rspec'
 require 'rspec/fire'
+require 'rspec/given'
 require 'awesome_print'
 require 'pry'
 
