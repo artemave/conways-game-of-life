@@ -7,8 +7,10 @@ describe Renderer do
   let(:screen_driver) { fire_double 'ScreenDriver' }
   
   it "draws live cells" do
-    screen_driver.should_receive(:draw_char).with(0, 1, '+')
-    screen_driver.should_receive(:draw_char).with(1, 3, '+')
+    screen_driver.should_receive(:clear_screen).ordered
+
+    screen_driver.should_receive(:draw_char).with(0, 1, '+').ordered
+    screen_driver.should_receive(:draw_char).with(1, 3, '+').ordered
 
     renderer.render live_population
   end

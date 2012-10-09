@@ -1,4 +1,6 @@
 require_relative 'renderer'
+require_relative 'population_generator'
+require_relative 'screen_driver'
 
 class Game
   attr_writer :renderer, :population_generator

@@ -1,3 +1,7 @@
+require_relative 'population'
+require_relative 'cell_neighbourhood'
+require_relative 'cell_generator'
+
 class PopulationGenerator
   def initialize opts
     @max_x = opts[:max_x]

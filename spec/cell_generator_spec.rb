@@ -39,4 +39,5 @@ describe CellGenerator do
     When(:new_cell) { CellGenerator.generate cell_with_neighbours_matrix}
     Then { new_cell.should be_alive }
   end
+
 end
