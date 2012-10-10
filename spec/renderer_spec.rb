@@ -1,7 +1,7 @@
 require_relative 'spec_helper'
 
 describe Renderer do
-  let(:live_population) { Population.new 3, 4, [[0,1,Cell.new('live')], [1,3,Cell.new('live')]]}
+  let(:live_population) { Population.new 3, 4, [[0,1,true], [1,3,true]]}
   let(:dead_population) { Population.new 2, 2, [] }
   let(:renderer) { Renderer.new screen_driver }
   let(:screen_driver) { fire_double 'ScreenDriver' }
@@ -16,7 +16,8 @@ describe Renderer do
   end
 
   it "does not draw dead cells" do
-    screen_driver.should_not_receive(:draw_char)
+    screen_driver.should_receive(:clear_screen).ordered
+    screen_driver.should_not_receive(:draw_char).ordered
 
     renderer.render dead_population
   end

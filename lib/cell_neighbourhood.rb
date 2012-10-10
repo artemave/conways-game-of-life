@@ -13,14 +13,14 @@ class CellNeighbourhood
   
   def self.wrap_in_dead_cells population
     columns = population.transpose.to_a
-    columns.unshift(Array.new(population.row_size) { Cell.new 'dead' })
-    columns.push(Array.new(population.row_size) { Cell.new 'dead' })
+    columns.unshift(Array.new(population.row_size) { false})
+    columns.push(Array.new(population.row_size) { false})
 
     x_wrapped_population = Matrix.columns columns
 
     rows = x_wrapped_population.to_a
-    rows.unshift(Array.new(x_wrapped_population.column_size) { Cell.new 'dead' })
-    rows.push(Array.new(x_wrapped_population.column_size) { Cell.new 'dead' })
+    rows.unshift(Array.new(x_wrapped_population.column_size) { false})
+    rows.push(Array.new(x_wrapped_population.column_size) { false})
 
     Matrix.rows rows
   end

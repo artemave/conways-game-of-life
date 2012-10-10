@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe Game do
-  let(:live_cell) { Cell.new('live') }
-  let(:live_cell2) { Cell.new('dead') }
+  let(:live_cell) { true }
+  let(:live_cell2) { false }
   let(:seed) { [live_cell, live_cell2] }
   let(:renderer) { fire_double "Renderer" }
   let(:population_generator) { fire_double "PopulationGenerator" }

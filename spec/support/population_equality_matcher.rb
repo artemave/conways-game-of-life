@@ -4,11 +4,11 @@ RSpec::Matchers.define :equal_population do |other_population|
     expected = []
 
     population.each_with_index do |cell, row, col|
-      actual << [row, col, cell.alive?]
+      actual << [row, col, cell]
     end
 
     other_population.each_with_index do |cell, row, col|
-      expected << [row, col, cell.alive?]
+      expected << [row, col, cell]
     end
 
     @error = if actual != expected

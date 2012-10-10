@@ -22,15 +22,15 @@ describe PopulationGenerator do
 
       cell_generator.stub(:generate) do |neighbourhood|
         if [neighbourhood1, neighbourhood2].include? neighbourhood
-          Cell.new 'live'
+          true
         else
-          Cell.new 'dead'
+          false
         end
       end
 
       new_generation = population_generator.generate(old_generation)
 
-      new_generation.should equal_population Population.new(2, 2, [[0,0,Cell.new('live')], [1,1,Cell.new('live')]])
+      new_generation.should equal_population Population.new(2, 2, [[0,0,true], [1,1,true]])
     end
   end
 end

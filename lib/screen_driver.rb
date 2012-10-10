@@ -25,10 +25,12 @@ class ScreenDriver
   end
 
   def max_x
-    Ncurses.stdscr.getmaxx
+    #Ncurses.stdscr.getmaxx
+    60
   end
 
   def max_y
-    Ncurses.stdscr.getmaxy
+    #Ncurses.stdscr.getmaxy
+    20
   end
 end

@@ -7,7 +7,7 @@ class Renderer
     @screen_driver.clear_screen
 
     generation.each_with_index do |cell, row, col|
-      @screen_driver.draw_char(row, col, '+') if cell.alive?
+      @screen_driver.draw_char(row, col, '+') if cell
     end
   end
 end

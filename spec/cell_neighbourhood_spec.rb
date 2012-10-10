@@ -1,8 +1,8 @@
 require_relative 'spec_helper'
 
 describe CellNeighbourhood do
-  let(:live) { Cell.new 'live' }
-  let(:dead) { Cell.new 'dead' }
+  let(:live) { true}
+  let(:dead) { false}
 
   it "produces matrix of cells with neighbours out of population" do
 
