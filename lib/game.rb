@@ -9,19 +9,19 @@ class Game
     @seed = seed
   end
 
+  def init_world
+    self.current_generation = population_generator.generate_from_seed(@seed)
+    renderer.render current_generation
+  end
+
   def next_turn!
-    next_generation = population_generator.generate current_generation
-    renderer.render next_generation
-    self.current_generation = next_generation
+    self.current_generation = population_generator.generate current_generation
+    renderer.render current_generation
   end
 
   private
 
-  attr_writer :current_generation
-
-  def current_generation
-    @current_generation ||= population_generator.generate_from_seed(@seed)
-  end
+  attr_accessor :current_generation
 
   def renderer
     @renderer ||= Renderer.new screen_driver
@@ -29,8 +29,12 @@ class Game
 
   def population_generator
     @population_generator ||= PopulationGenerator.new(
-      max_x: screen_driver.max_x,
-      max_y: screen_driver.max_y
+      # Full screen is just too damn slow with my ultra performant solution
+      #
+      # max_x: screen_driver.max_x,
+      # max_y: screen_driver.max_y
+      max_x: 60,
+      max_y: 30
     )
   end
 

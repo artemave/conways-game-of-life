@@ -17,15 +17,18 @@ describe Game do
     population_generator.stub(:generate_from_seed).with(seed).and_return(first_population)
   end
 
-  it "starts with initial cell configuration (seed)" do
-    expect {Game.new seed}.to_not raise_error
+  it "draws initial population (from seed)" do
+    renderer.should_receive(:render).with(first_population)
+    game.init_world
   end
 
   describe "turn" do
     it "wires up generation calculator and renderer" do
       population_generator.stub(:generate).with(first_population).and_return(second_population)
-      renderer.should_receive(:render).with(second_population)
+      renderer.should_receive(:render).with(first_population).ordered
+      renderer.should_receive(:render).with(second_population).ordered
 
+      game.init_world
       game.next_turn!
     end
 
@@ -33,12 +36,13 @@ describe Game do
       population_generator.stub(:generate).with(first_population).and_return(second_population)
       population_generator.stub(:generate).with(second_population).and_return(third_population)
 
-      renderer.should_receive(:render).with(second_population)
-      renderer.should_receive(:render).with(third_population)
+      renderer.should_receive(:render).with(first_population).ordered
+      renderer.should_receive(:render).with(second_population).ordered
+      renderer.should_receive(:render).with(third_population).ordered
 
+      game.init_world
       game.next_turn!
       game.next_turn!
     end
   end
-
 end

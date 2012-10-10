@@ -16,7 +16,8 @@ describe Renderer do
   end
 
   it "does not draw dead cells" do
-    screen_driver.should_not_receive(:draw_char)
+    screen_driver.should_receive(:clear_screen).ordered
+    screen_driver.should_not_receive(:draw_char).ordered
 
     renderer.render dead_population
   end
